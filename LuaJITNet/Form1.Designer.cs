@@ -38,6 +38,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCont = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.udInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -51,7 +52,7 @@
             // 
             // btnRun
             // 
-            this.btnRun.Location = new System.Drawing.Point(189, 28);
+            this.btnRun.Location = new System.Drawing.Point(194, 12);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(75, 35);
             this.btnRun.TabIndex = 0;
@@ -163,6 +164,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnCont);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnRun);
             this.panel1.Controls.Add(this.udInput);
@@ -171,6 +173,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(288, 94);
             this.panel1.TabIndex = 9;
+            // 
+            // btnCont
+            // 
+            this.btnCont.Enabled = false;
+            this.btnCont.Location = new System.Drawing.Point(194, 53);
+            this.btnCont.Name = "btnCont";
+            this.btnCont.Size = new System.Drawing.Size(75, 35);
+            this.btnCont.TabIndex = 4;
+            this.btnCont.Text = "Continue";
+            this.btnCont.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -214,6 +226,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnCont;
     }
 }
 

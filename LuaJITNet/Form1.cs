@@ -10,17 +10,19 @@ using System.Windows.Forms;
 using NLua;
 using ReferenceFunctions;
 using System.Collections;
+using KeraLua;
+using System.Threading;
 
 namespace LuaJITNet
 {
     public partial class Form1 : Form
     {
-        private Lua globalState;
+        public Boolean running = false;
+        AutoResetEvent _continuing = new AutoResetEvent(false);
 
         public Form1()
         {
             InitializeComponent();
-            this.globalState = new Lua();
         }
 
         private void btnRun_Click(object sender, EventArgs e)
@@ -29,9 +31,12 @@ namespace LuaJITNet
             {
                 int iterations = (int)udInput.Value;
 
-                Lua state = new Lua();
+                NLua.Lua state = new NLua.Lua();
 
                 state["Funcs"] = new ReferenceFunctions.References(state);
+                state.DebugHook += this.luaBreakHook;
+                state.SetDebugHook(NLua.Event.EventMasks.LUA_MASKLINE, 0);
+
                 //state.LoadCLRPackage();
                 //state.DoString(@" import ('ReferenceFunctions.dll', 'Funcs') 
                 //    import ('System.Web') ");
@@ -84,6 +89,28 @@ namespace LuaJITNet
             sb.Append("}");
 
             return sb.ToString();
+        }
+
+        public void luaBreakHook(object sender, NLua.Event.DebugHookEventArgs e)
+        {
+            _continuing.Reset();
+            this.btnCont.Enabled = true;
+
+            NLua.Lua state = (NLua.Lua)sender;
+            LuaDebug debugger = e.LuaDebug;
+            
+            return;
+        }
+
+        public void displayBreakPoint(string data)
+        {
+
+        }
+
+        private void btnCont_Click(object sender, EventArgs e)
+        {
+            this.btnCont.Enabled = false;
+            _continuing.Set();
         }
     }
 }
